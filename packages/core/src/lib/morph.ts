@@ -95,6 +95,17 @@ export class Morph {
   }
 
   /**
+   * Clear all tracked items in a group.
+   * Does not affect other groups or configuration.
+   */
+  reset(group: string): void {
+    const keys = this.storage.keys(`${group}:`);
+    for (const key of keys) {
+      this.storage.delete(key);
+    }
+  }
+
+  /**
    * Record an interaction for an item.
    * Updates the frecency score, use count, and last-used timestamp.
    */
