@@ -1,0 +1,19 @@
+{
+  "name": "morph",
+  "private": true,
+  "description": "Frecency-based UI adaptation. Your interface learns what each user actually uses.",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r dev",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
