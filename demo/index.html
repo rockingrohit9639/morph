@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morph — Frecency-based UI adaptation</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="bg-white text-neutral-900 min-h-screen font-sans">
+    <!-- Header -->
+    <header class="border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold tracking-tight">morph</span>
+        <span class="text-neutral-400 text-sm">by @rockingrohit9639</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.npmjs.com/package/@morph-sdk/core" target="_blank" class="text-sm text-neutral-600 hover:text-neutral-900 border border-neutral-200 px-3 py-1.5 transition-colors">npm</a>
+        <a href="https://github.com/rockingrohit9639/morph" target="_blank" class="text-sm text-white bg-neutral-900 px-3 py-1.5 hover:bg-neutral-700 transition-colors">GitHub</a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="border-b border-neutral-200 px-6 py-16 text-center">
+      <h1 class="text-5xl font-bold tracking-tight leading-tight">
+        Your UI learns what<br/><span class="bg-yellow-200 px-2">each user</span> actually uses.
+      </h1>
+      <p class="mt-6 text-neutral-500 text-lg max-w-xl mx-auto leading-relaxed">
+        Frecency-based UI adaptation. Track interactions, rank by usage, surface what matters — zero settings pages needed. 4.5KB, zero dependencies.
+      </p>
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <code class="text-sm bg-neutral-100 border border-neutral-200 px-4 py-2 font-mono">npm i @morph-sdk/core</code>
+        <a href="#demos" class="text-sm border border-neutral-900 bg-neutral-900 text-white px-4 py-2 hover:bg-neutral-700 transition-colors">See demos</a>
+      </div>
+    </section>
+
+    <!-- Stats bar -->
+    <section class="border-b border-neutral-200 px-6 py-3 flex items-center justify-center gap-8 text-sm text-neutral-500">
+      <span><strong class="text-neutral-900">0</strong> dependencies</span>
+      <span class="text-neutral-300">·</span>
+      <span><strong class="text-neutral-900">4.5KB</strong> bundle size</span>
+      <span class="text-neutral-300">·</span>
+      <span><strong class="text-neutral-900">TypeScript</strong> first</span>
+      <span class="text-neutral-300">·</span>
+      <span><strong class="text-neutral-900">Framework</strong> agnostic</span>
+    </section>
+
+    <!-- Demos -->
+    <section id="demos" class="px-6 py-12 max-w-5xl mx-auto">
+      <h2 class="text-xs font-medium text-neutral-400 uppercase tracking-widest mb-8">Interactive Demos</h2>
+
+      <!-- Demo 1: Sidebar -->
+      <div class="border border-neutral-200 mb-8">
+        <div class="border-b border-neutral-200 px-5 py-3 flex items-center justify-between bg-neutral-50">
+          <h3 class="text-sm font-medium">Adaptive Sidebar</h3>
+          <div class="flex gap-2">
+            <button class="text-xs border border-neutral-200 px-2 py-1 hover:bg-neutral-100 transition-colors" id="sidebar-refresh">Refresh</button>
+            <button class="text-xs border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50 transition-colors" id="sidebar-reset">Reset</button>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="w-52 border-r border-neutral-200 p-3 flex flex-col gap-0.5" id="sidebar-demo"></div>
+          <div class="flex-1 p-5" id="sidebar-content"></div>
+        </div>
+      </div>
+
+      <!-- Demo 2: Command Palette -->
+      <div class="border border-neutral-200 mb-8">
+        <div class="border-b border-neutral-200 px-5 py-3 flex items-center justify-between bg-neutral-50">
+          <h3 class="text-sm font-medium">Command Palette</h3>
+          <div class="flex gap-2">
+            <button class="text-xs border border-neutral-200 px-2 py-1 hover:bg-neutral-100 transition-colors" id="commands-refresh">Refresh</button>
+            <button class="text-xs border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50 transition-colors" id="commands-reset">Reset</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="border border-neutral-200 max-w-md mx-auto">
+            <input type="text" id="command-search" placeholder="Type a command..." class="w-full px-4 py-2.5 text-sm border-b border-neutral-200 outline-none placeholder:text-neutral-400" />
+            <div id="command-list" class="max-h-64 overflow-y-auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo 3: Action Toolbar -->
+      <div class="border border-neutral-200 mb-8">
+        <div class="border-b border-neutral-200 px-5 py-3 flex items-center justify-between bg-neutral-50">
+          <h3 class="text-sm font-medium">Action Toolbar</h3>
+          <div class="flex gap-2">
+            <button class="text-xs border border-neutral-200 px-2 py-1 hover:bg-neutral-100 transition-colors" id="toolbar-refresh">Refresh</button>
+            <button class="text-xs border border-red-200 text-red-600 px-2 py-1 hover:bg-red-50 transition-colors" id="toolbar-reset">Reset</button>
+          </div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs text-neutral-500 mb-3">Most-used actions surface to the front. Inactive ones fade.</p>
+          <div id="toolbar-demo" class="flex flex-wrap gap-1.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="border-t border-neutral-200 px-6 py-12 max-w-5xl mx-auto">
+      <h2 class="text-xs font-medium text-neutral-400 uppercase tracking-widest mb-6">How it works</h2>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="border border-neutral-200 p-5">
+          <div class="text-sm font-medium mb-2">1. Track</div>
+          <p class="text-xs text-neutral-500 leading-relaxed">Call <code class="bg-neutral-100 px-1">morph.track(group, id)</code> on user interactions. Clicks, opens, hovers — you decide what counts.</p>
+        </div>
+        <div class="border border-neutral-200 p-5">
+          <div class="text-sm font-medium mb-2">2. Rank</div>
+          <p class="text-xs text-neutral-500 leading-relaxed">Call <code class="bg-neutral-100 px-1">morph.rank(group)</code> to get items sorted by frecency. Recent + frequent items score highest.</p>
+        </div>
+        <div class="border border-neutral-200 p-5">
+          <div class="text-sm font-medium mb-2">3. Adapt</div>
+          <p class="text-xs text-neutral-500 leading-relaxed">Use the ranking to reorder, show/hide, emphasize/fade. The UI adapts to each user — no settings page needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-200 px-6 py-4 text-center text-xs text-neutral-400">
+      MIT · @morph-sdk/core · Built by Rohit Kumar Saini
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

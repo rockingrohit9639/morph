@@ -1,0 +1,19 @@
+{
+  "name": "morph-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@morph-sdk/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.4",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.5.0",
+    "vite": "^6.0.0"
+  }
+}
