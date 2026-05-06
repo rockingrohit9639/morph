@@ -39,7 +39,7 @@ function renderSidebar() {
       return `
         <button class="flex items-center justify-between px-3 py-1.5 text-sm ${textColor} hover:bg-neutral-100 text-left transition-colors" data-id="${item.id}">
           <span>${item.label}</span>
-          ${score ? `<span class="text-xs text-neutral-300 tabular-nums">${score}</span>` : ""}
+          ${score ? `<span class="text-xs text-neutral-300 tabular-nums score" data-score-id="${item.id}">${score}</span>` : ""}
         </button>
       `;
     })
@@ -62,13 +62,14 @@ function renderSidebar() {
         <span class="font-medium">${ranked[0]?.id ?? "—"}</span>
       </div>
     </div>
-    <p class="mt-4 text-xs text-neutral-400 leading-relaxed">Click items on the left. Refresh the page — they stay ranked. Data is in localStorage.</p>
+    <p class="mt-4 text-xs text-neutral-400 leading-relaxed">Click items on the left, then refresh the page to see them reorder.</p>
   `;
 
   container.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      morph.track("sidebar", (btn as HTMLElement).dataset.id!);
-      renderSidebar();
+      const id = (btn as HTMLElement).dataset.id!;
+      morph.track("sidebar", id);
+      flashButton(btn as HTMLElement);
     });
   });
 }
@@ -121,8 +122,9 @@ function renderCommands(filter = "") {
 
   list.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      morph.track("commands", (btn as HTMLElement).dataset.id!);
-      renderCommands(filter);
+      const id = (btn as HTMLElement).dataset.id!;
+      morph.track("commands", id);
+      flashButton(btn as HTMLElement);
     });
   });
 }
@@ -180,10 +182,18 @@ function renderToolbar() {
 
   container.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      morph.track("toolbar", (btn as HTMLElement).dataset.id!);
-      renderToolbar();
+      const id = (btn as HTMLElement).dataset.id!;
+      morph.track("toolbar", id);
+      flashButton(btn as HTMLElement);
     });
   });
+}
+
+// ─── Utils ───────────────────────────────────────────────────────────────────
+
+function flashButton(el: HTMLElement) {
+  el.classList.add("bg-neutral-200");
+  setTimeout(() => el.classList.remove("bg-neutral-200"), 150);
 }
 
 // ─── Init ────────────────────────────────────────────────────────────────────
@@ -197,7 +207,7 @@ document.getElementById("command-search")?.addEventListener("input", (e) => {
   renderCommands((e.target as HTMLInputElement).value);
 });
 
-// Reset and refresh buttons
+// Reset buttons re-render (clear data + re-sort)
 document.getElementById("sidebar-refresh")?.addEventListener("click", renderSidebar);
 document.getElementById("sidebar-reset")?.addEventListener("click", () => {
   morph.reset("sidebar");
