@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@morph-sdk/core": "workspace:*"
+    "@morph-sdk/core": "^0.1.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",

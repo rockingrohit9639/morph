@@ -15,8 +15,8 @@ importers:
   demo:
     dependencies:
       '@morph-sdk/core':
-        specifier: workspace:*
-        version: link:../packages/core
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.2.4
@@ -425,6 +425,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@morph-sdk/core@0.1.0':
+    resolution: {integrity: sha512-89T+08aaG65JdkfNoXPDGX2Ik2lCysyvfVl9CePN2mrEyNW91MRH7iKM3Nw0nyzX0ZcrCa+9jJxwqmww+8QGGg==}
 
   '@rollup/rollup-android-arm-eabi@4.60.3':
     resolution: {integrity: sha512-x35CNW/ANXG3hE/EZpRU8MXX1JDN86hBb2wMGAtltkz7pc6cxgjpy1OMMfDosOQ+2hWqIkag/fGok1Yady9nGw==}
@@ -1341,6 +1344,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@morph-sdk/core@0.1.0': {}
 
   '@rollup/rollup-android-arm-eabi@4.60.3':
     optional: true
