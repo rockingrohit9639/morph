@@ -1,6 +1,6 @@
-import { computeNewScore } from "./frecency";
+import { computeNewScore, getDecayedScore, isItemActive } from "./frecency";
 import { LocalStorageAdapter } from "./storage";
-import type { MorphConfig, MorphGroupConfig, MorphItemData, MorphStorage } from "./types";
+import type { MorphConfig, MorphGroupConfig, MorphItemData, MorphRankedItem, MorphStorage } from "./types";
 
 const DEFAULT_CONFIG: MorphGroupConfig = {
   decayConstant: 0.05,
@@ -48,6 +48,37 @@ export class Morph {
   /** Write item data to storage. */
   private setItem(group: string, id: string, data: MorphItemData): void {
     this.storage.set(this.key(group, id), JSON.stringify(data));
+  }
+
+  /**
+   * Get all tracked items in a group, sorted by frecency score (highest first).
+   * Applies read-time decay — scores reflect current relevance, not stored value.
+   */
+  rank(group: string): MorphRankedItem[] {
+    const now = Date.now();
+    const config = this.getGroupConfig(group);
+    const keys = this.storage.keys(`${group}:`);
+
+    const items: { id: string; score: number; isActive: boolean }[] = [];
+
+    for (const key of keys) {
+      const raw = this.storage.get(key);
+      if (!raw) continue;
+
+      const data = JSON.parse(raw) as MorphItemData;
+      const id = key.slice(group.length + 1); // strip "group:" prefix
+      const score = getDecayedScore(data, now, config);
+      const active = isItemActive(data, now, config);
+
+      items.push({ id, score, isActive: active });
+    }
+
+    items.sort((a, b) => b.score - a.score);
+
+    return items.map((item, index) => ({
+      ...item,
+      rank: index + 1,
+    }));
   }
 
   /**
