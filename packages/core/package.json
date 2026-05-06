@@ -1,7 +1,15 @@
 {
-  "name": "@morph-ui/core",
-  "version": "0.0.1",
+  "name": "@morph-sdk/core",
+  "version": "0.1.0",
   "description": "Framework-agnostic frecency engine for adaptive UIs",
+  "author": "Rohit Kumar Saini",
+  "keywords": ["frecency", "adaptive-ui", "user-preferences", "personalization", "localStorage", "ui"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rockingrohit9639/morph.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/rockingrohit9639/morph#readme",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
