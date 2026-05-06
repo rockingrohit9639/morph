@@ -82,6 +82,19 @@ export class Morph {
   }
 
   /**
+   * Check if a specific item is still "active" (decayed score above threshold).
+   * Returns false for items that were never tracked.
+   */
+  isActive(group: string, id: string): boolean {
+    const data = this.getItem(group, id);
+    if (!data) return false;
+
+    const now = Date.now();
+    const config = this.getGroupConfig(group);
+    return isItemActive(data, now, config);
+  }
+
+  /**
    * Record an interaction for an item.
    * Updates the frecency score, use count, and last-used timestamp.
    */
